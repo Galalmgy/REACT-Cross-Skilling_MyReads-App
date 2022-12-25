@@ -1,8 +1,11 @@
 
+
 import {Link} from "react-router-dom"
 import SearchResult from "./SearchResult"
 
 const Search = ({showSearchPage,setShowSearchpage,search,books,shelfType,setQuery,navigate}) =>{
+
+
     return (
     <div className="search-books">
     <div className="search-books-bar">
@@ -19,14 +22,15 @@ const Search = ({showSearchPage,setShowSearchpage,search,books,shelfType,setQuer
         <input
           type="text"
           placeholder="Search by title, author, or ISBN"
-          onChange={search}
+          onChange={(event) => search(event.target.value)}
+         
           
         />
       </div>
     </div>
     <div className="search-books-results">
-      <ol className="books-grid">{
-        /*<SearchResult books={books} shelfType={shelfType} />*/}
+      <ol className="books-grid">
+        <SearchResult books={books} shelfType={shelfType} />
       </ol>
     </div>
   </div>)

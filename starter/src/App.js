@@ -29,13 +29,40 @@ const App =() =>{
 
   }
   const [query,setQuery] = useState("");
+  const [booksFound,setBooksFound]=useState([]);
     
-  const handleSearch = async(e)=>{
-      setQuery( e.target.value);
-      searchBooks(query);
-      console.log(query)
+  const handleSearch = async (query)=>{
+    setQuery(query);      
+      console.log("query is:",query)
+    searchBook(query);
   
   }
+  const searchBook = async (query)=> {
+    try {
+      const res = await  BooksAPI.search(query)
+      console.log("response is:",res)
+      setBooksFound(res.map((b)=>{
+        b.id === booksFound.id ? b.shelf=booksFound.shelf : b.shelf=""
+      return b
+      }
+       ))
+  console.log("returned response=",res)
+    }
+   
+   // if (res && !res.error){
+               
+    catch {
+      return  `No books with this name: "${query}"`}
+
+  }  
+
+    
+        
+
+    
+          
+         
+  
  
 
   // const updateQuery = (query) => {
@@ -44,24 +71,7 @@ const App =() =>{
   // const clearQuery= () =>{
   // updateQuery("");
   // }
-  const searchBooks = async (query)=> {
-    const res = await  BooksAPI.search(query)
-     //(res && !res.error)
-      try{
-      
-        setBooks(res.map((booksFound)=>{
-           booksFound.forEach((book)=>{
-            if (booksFound.id === book.id) booksFound.shelf=book.shelf
-            console.log({books})
-          })
-          
-        }))
-        
 
-      }catch {
-        setBooks(`No books with this name: "${query}`)}
-
-      }
     
   
 
@@ -80,8 +90,8 @@ const App =() =>{
         <Search 
           showSearchPage={showSearchPage} 
           setShowSearchpage={setShowSearchpage} 
-          search={handleSearch} 
-          books={books}
+          search={handleSearch}
+          books={booksFound}
           shelfType={shelfType}
           setQuery={setQuery}
           navigate={useNavigate}

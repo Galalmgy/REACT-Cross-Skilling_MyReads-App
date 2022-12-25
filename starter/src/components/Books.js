@@ -14,7 +14,8 @@ const Books = ({books,shelfType})=>{
                 width: 128,
                 height: 193,
                 backgroundImage:
-                  `url(${books.imageLinks.smallThumbnail})`,
+                (books.imageLinks.smallThumbnail) ? 
+                  (`url(${books.imageLinks.smallThumbnail})`): "",
               }}
             ></div>
             <div className="book-shelf-changer">
