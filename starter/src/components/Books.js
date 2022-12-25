@@ -1,4 +1,4 @@
-import { Component } from "react";
+
 const Books = ({books,shelfType})=>{
   const changeShelf= (e) => {
     e.preventDefault();

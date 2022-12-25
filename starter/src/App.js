@@ -4,22 +4,22 @@ import Search from "./components/Search";
 import Home from "./components/Home"
 import { useNavigate,Route , Routes } from "react-router-dom";
 import * as BooksAPI from "./BooksAPI"
-import { forEach } from "spec";
-import { handlers } from "reporter";
 
 
 const App =() =>{
-
+  let navigate = useNavigate();
   const [showSearchPage, setShowSearchpage] = useState(false);
-   useNavigate("/");
+
   const [books,setBooks]= useState([]);
   useEffect(()=>{
     const getBooks =async()=>{
       const res = await BooksAPI.getAll();
       setBooks(res)
+      
     };
 
     getBooks();
+    
   },[]);
 
   const shelfType= async(book,shelf) => {
@@ -30,9 +30,10 @@ const App =() =>{
   }
   const [query,setQuery] = useState("");
     
-  const handlerSearch = async(e)=>{
+  const handleSearch = async(e)=>{
       setQuery( e.target.value);
       searchBooks(query);
+      console.log(query)
   
   }
  
@@ -45,18 +46,20 @@ const App =() =>{
   // }
   const searchBooks = async (query)=> {
     const res = await BooksAPI.search(query)
-    if (res && !res.error){
-      setBooks(res.map((booksFound)=>{
-        res.forEach((book)=>{
-          if (booksFound.id === book.id) booksFound.shelf=book.shelf
-        })
-        
-      }))} else {
-        setBooks(`No books with this name: "${query}`)
-      }
+     //(res && !res.error)
+      try{
+        setBooks((res).map((booksFound)=>{
+          booksFound.forEach((book)=>{
+            if (booksFound.id === book.id) books.shelf=book.shelf
+            console.log({books})
+          })
+          
+        }))
 
-      
-    }
+      }catch {
+        setBooks(`No books with this name: "${query}`)}
+
+      }
     
   
 
@@ -75,9 +78,11 @@ const App =() =>{
         <Search 
           showSearchPage={showSearchPage} 
           setShowSearchpage={setShowSearchpage} 
-          search={handlerSearch} 
+          search={handleSearch} 
           books={books}
           shelfType={shelfType}
+          setQuery={setQuery}
+          navigate={"navigate"}
           />}
     />
   

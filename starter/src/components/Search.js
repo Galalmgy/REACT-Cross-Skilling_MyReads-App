@@ -1,13 +1,17 @@
+
 import {Link} from "react-router-dom"
-import { search } from "../BooksAPI"
 import SearchResult from "./SearchResult"
-const Search = ({showSearchPage,setShowSearchpage,search,books,shelfType}) =>{
+
+const Search = ({showSearchPage,setShowSearchpage,search,books,shelfType,setQuery,navigate}) =>{
     return (
     <div className="search-books">
     <div className="search-books-bar">
       <Link to="/"
         className="close-search"
-        onClick={() => setShowSearchpage(!showSearchPage)}
+        onClick={() => {
+          setShowSearchpage(!showSearchPage);
+          navigate("/")
+        }}
       >
         Close
       </Link>
@@ -16,12 +20,13 @@ const Search = ({showSearchPage,setShowSearchpage,search,books,shelfType}) =>{
           type="text"
           placeholder="Search by title, author, or ISBN"
           onChange={search}
+          
         />
       </div>
     </div>
     <div className="search-books-results">
-      <ol className="books-grid">
-        <SearchResult books={books} shelfType={shelfType} />
+      <ol className="books-grid">{/*
+        <SearchResult books={books} shelfType={shelfType} />*/}
       </ol>
     </div>
   </div>)
