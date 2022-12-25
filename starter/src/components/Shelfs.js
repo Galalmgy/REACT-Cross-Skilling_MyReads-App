@@ -1,6 +1,6 @@
 import Books from "./Books"
 const Shelfs=({books,shelfType,shelfName,shelf}) => {
-    const booksOnShelf = books.filter((b)=> b.shelf === shelfType)
+    const booksOnShelf = books.filter((b)=> b.shelf === shelf)
     return (
         <div className="bookshelf">
         <h2 className="bookshelf-title">{shelfName}</h2>

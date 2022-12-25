@@ -1,0 +1,18 @@
+import Books from "./Books";
+const SearchResult =({books ,shelfType})=>{
+    return(
+        <div className="bookshelf">
+        <h2 className="bookshelf-title">Add a book</h2>
+        <div className="bookshelf-books">
+          <ol className="books-grid">{books.map((book)=>(
+            <Books key={book.id} books={book} shelfType={shelfType}/>
+          
+
+         ))}
+        </ol>
+        </div>
+        </div>
+
+    )
+}
+export default SearchResult;

@@ -1,4 +1,9 @@
-const Books = ({books})=>{
+import { Component } from "react";
+const Books = ({books,shelfType})=>{
+  const changeShelf= (e) => {
+    e.preventDefault();
+    shelfType(books,e.target.value)
+  };
     return (
         <li>
         <div className="book">
@@ -9,11 +14,11 @@ const Books = ({books})=>{
                 width: 128,
                 height: 193,
                 backgroundImage:
-                  `url(${books.backgroundImage})`,
+                  `url(${books.imageLinks.smallThumbnail})`,
               }}
             ></div>
             <div className="book-shelf-changer">
-              <select>
+              <select onChange={changeShelf} value={books.shelf}>
                 <option value="none" disabled>
                   Move to...
                 </option>
@@ -26,8 +31,8 @@ const Books = ({books})=>{
               </select>
             </div>
           </div>
-          <div className="book-title">To Kill a Mockingbird</div>
-          <div className="book-authors">Harper Lee</div>
+          <div className="book-title">{books.title}</div>
+          <div className="book-authors">{books.authors}</div>
         </div>
       </li>
     
