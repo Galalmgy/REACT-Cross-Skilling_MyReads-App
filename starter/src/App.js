@@ -3,7 +3,7 @@ import { useEffect, useState} from "react";
 import Search from "./components/Search";
 import Home from "./components/Home"
 import { useNavigate,Route , Routes } from "react-router-dom";
-import * as BookAPI from "./BooksAPI"
+import * as BooksAPI from "./BooksAPI"
 
 
 const App =() =>{
@@ -12,12 +12,18 @@ const App =() =>{
   const [books,setBooks]= useState([]);
   useEffect(()=>{
     const getBooks =async()=>{
-      const res = await BookAPI.getAll();
+      const res = await BooksAPI.getAll();
       setBooks(res)
     };
 
     getBooks();
   },[]);
+  const shelfType= async(book,shelf) => {
+    await BooksAPI.update(book,shelf);
+    const res = await BooksAPI.getAll();
+    setBooks(res)
+
+  }
 
   return (
     <Routes>
@@ -25,7 +31,7 @@ const App =() =>{
       exact
       path="/"
       element={
-        <Home books={books} showSearchPage={showSearchPage} setShowSearchpage={setShowSearchpage} />}
+        <Home books={books} showSearchPage={showSearchPage} setShowSearchpage={setShowSearchpage} shelfType={shelfType} />}
   
     />
     <Route
