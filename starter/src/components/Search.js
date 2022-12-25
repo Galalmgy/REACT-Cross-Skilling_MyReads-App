@@ -1,6 +1,6 @@
 import {Link} from "react-router-dom"
 import { search } from "../BooksAPI"
-import SearchResult from "./SerachResult"
+import SearchResult from "./SearchResult"
 const Search = ({showSearchPage,setShowSearchpage,search,books,shelfType}) =>{
     return (
     <div className="search-books">
