@@ -7,7 +7,7 @@ import * as BooksAPI from "./BooksAPI"
 
 
 const App =() =>{
-  let navigate = useNavigate();
+  useNavigate();
   const [showSearchPage, setShowSearchpage] = useState(false);
 
   const [books,setBooks]= useState([]);
@@ -45,16 +45,18 @@ const App =() =>{
   // updateQuery("");
   // }
   const searchBooks = async (query)=> {
-    const res = await BooksAPI.search(query)
+    const res = await  BooksAPI.search(query)
      //(res && !res.error)
       try{
-        setBooks((res).map((booksFound)=>{
-          booksFound.forEach((book)=>{
-            if (booksFound.id === book.id) books.shelf=book.shelf
+      
+        setBooks(res.map((booksFound)=>{
+           booksFound.forEach((book)=>{
+            if (booksFound.id === book.id) booksFound.shelf=book.shelf
             console.log({books})
           })
           
         }))
+        
 
       }catch {
         setBooks(`No books with this name: "${query}`)}
@@ -82,7 +84,7 @@ const App =() =>{
           books={books}
           shelfType={shelfType}
           setQuery={setQuery}
-          navigate={"navigate"}
+          navigate={useNavigate}
           />}
     />
   

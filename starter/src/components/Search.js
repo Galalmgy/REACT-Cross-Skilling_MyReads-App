@@ -25,8 +25,8 @@ const Search = ({showSearchPage,setShowSearchpage,search,books,shelfType,setQuer
       </div>
     </div>
     <div className="search-books-results">
-      <ol className="books-grid">{/*
-        <SearchResult books={books} shelfType={shelfType} />*/}
+      <ol className="books-grid">{
+        /*<SearchResult books={books} shelfType={shelfType} />*/}
       </ol>
     </div>
   </div>)
