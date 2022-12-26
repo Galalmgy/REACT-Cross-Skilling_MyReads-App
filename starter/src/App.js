@@ -30,51 +30,65 @@ const App =() =>{
   }
   const [query,setQuery] = useState("");
   const [booksFound,setBooksFound]=useState([]);
+  const [searchState,setSearchState] = useState(false);
     
   const handleSearch = async (query)=>{
-    setQuery(query);      
-      console.log("query is:",query)
-    searchBook(query);
+    
+    setQuery(query); 
+    setSearchState(true)     
+    console.log("query returned is:",query)
+    
+    if (query === "" ){ setBooksFound([]) }else {searchBook(query)};
   
   }
   const searchBook = async (query)=> {
-    try {
-      const res = await  BooksAPI.search(query)
-      console.log("response is:",res)
-      setBooksFound(res.map((b)=>{
-        b.id === booksFound.id ? b.shelf=booksFound.shelf : b.shelf=""
-      return b
-      }
-       ))
-  console.log("returned response=",res)
-    }
    
-   // if (res && !res.error){
-               
-    catch {
-      return  `No books with this name: "${query}"`}
-
-  }  
-
-    
+    //try {
+      
+      const res = await  BooksAPI.search(query)
+      console.log(query)
+      console.log("Server response is:",res)
+      console.log("Server response length is:",res.length)
+      if (res.length > 0){
         
+        setBooksFound(res.map((item)=>{
+          let bookExist = booksFound.find((book)=> book.id === item.id);
+          if (bookExist) {
+            item.shelf = bookExist.shelf
+          }
+          console.log(item);
+          return item;
+        }
+        ))
+        return
+        //
+          //console.log("returned response=",res)
+      } else {
+        
+        setSearchState(false);
+        return setBooksFound(`No books found with this name: "${query}"`);
 
+      // console.log("No books Found")}
+      // if (searchState=== false) {
+       }     
+//        return(setBooksFound) 
+      
+        //b.id === booksFound.id ? b.shelf=booksFound.shelf : b.shelf=""
+     //
     
-          
-         
-  
- 
-
+   /*  
+    catch  { 
+      setSearchState(false)
+      console.log("No books Found")
+      return setBooksFound( `No books found with this name: "${query}"`)
+  }*/
+}  
   // const updateQuery = (query) => {
   // setQuery(query.trim());
   // }
   // const clearQuery= () =>{
   // updateQuery("");
   // }
-
-    
-  
-
   return (
     <Routes>
      <Route
@@ -89,9 +103,11 @@ const App =() =>{
       element={
         <Search 
           showSearchPage={showSearchPage} 
-          setShowSearchpage={setShowSearchpage} 
+          setShowSearchpage={setShowSearchpage}
+          searchState ={searchState}
           search={handleSearch}
           books={booksFound}
+          query={query}
           shelfType={shelfType}
           setQuery={setQuery}
           navigate={useNavigate}

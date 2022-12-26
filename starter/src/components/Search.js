@@ -3,7 +3,7 @@
 import {Link} from "react-router-dom"
 import SearchResult from "./SearchResult"
 
-const Search = ({showSearchPage,setShowSearchpage,search,books,shelfType,setQuery,navigate}) =>{
+const Search = ({showSearchPage,setShowSearchpage,searchState,search,books,shelfType,query,navigate}) =>{
 
 
     return (
@@ -30,7 +30,7 @@ const Search = ({showSearchPage,setShowSearchpage,search,books,shelfType,setQuer
     </div>
     <div className="search-books-results">
       <ol className="books-grid">
-        <SearchResult books={books} shelfType={shelfType} />
+        <SearchResult books={books} shelfType={shelfType} query={query} searchState={searchState}/>
       </ol>
     </div>
   </div>)

@@ -4,6 +4,8 @@ const Books = ({books,shelfType})=>{
     e.preventDefault();
     shelfType(books,e.target.value)
   };
+ // let smallThumbnail = books.imageLinks.smallThumbnail.isExist
+
     return (
         <li>
         <div className="book">
@@ -14,8 +16,8 @@ const Books = ({books,shelfType})=>{
                 width: 128,
                 height: 193,
                 backgroundImage:
-                (books.imageLinks.smallThumbnail) ? 
-                  (`url(${books.imageLinks.smallThumbnail})`): "",
+                books.imageLinks ?
+                  `url(${books.imageLinks.smallThumbnail})`:"",
               }}
             ></div>
             <div className="book-shelf-changer">
