@@ -36,7 +36,6 @@ const App =() =>{
     
     setQuery(query); 
     setSearchState(true)     
-    //console.log("query returned is:",query)
     
     if (query === "" ){ setBooksFound([]) }else {searchBook(query)};
   
@@ -46,9 +45,7 @@ const App =() =>{
     //try {
       
       const res = await  BooksAPI.search(query)
-      /*console.log(query)
-      console.log("Server response is:",res)
-      console.log("Server response length is:",res.length)*/
+
       if (res.length > 0){
         
         setBooksFound(res.map((item)=>{
@@ -59,40 +56,22 @@ const App =() =>{
             item.shelf = bookExist.shelf
              console.log(bookExist.shelf)
            }
-          //console.log(item);
+
           return item;
         }
         ))
-        //return
-        //
-          //console.log("returned response=",res)
+
       } else {
         console.log("No books Found");
         //setSearchState(false);
         return setBooksFound([]);
 
-      // console.log("No books Found")}
-      // if (searchState=== false) {
+
        }     
-//        return(setBooksFound) 
-      
-        //b.id === booksFound.id ? b.shelf=booksFound.shelf : b.shelf=""
-     //
-    
-   /*  
-    catch  { 
-      setSearchState(false)
-      console.log("No books Found")
-      return setBooksFound( `No books found with this name: "${query}"`)
-  }*/
+
 }  
-  // const updateQuery = (query) => {
-  // setQuery(query.trim());
-  // }
-  // const clearQuery= () =>{
-  // updateQuery("");
-  // }
-  return (
+
+return (
     <Routes>
      <Route
       exact

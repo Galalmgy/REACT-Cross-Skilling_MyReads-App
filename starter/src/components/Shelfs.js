@@ -8,8 +8,6 @@ const Shelfs=({books,shelfType,shelfName,shelf}) => {
         <div className="bookshelf-books">
           <ol className="books-grid">{booksOnShelf.map((book)=>(
             <Books key={book.id} books={book} shelfType={shelfType}/>
-          
-
          ))}
         </ol>
         </div>
