@@ -26,8 +26,8 @@ const App =() =>{
     await BooksAPI.update(book,shelf);
     const res = await BooksAPI.getAll();
     setBooks(res)
+  };
 
-  }
   const [query,setQuery] = useState("");
   const [booksFound,setBooksFound]=useState([]);
   const [searchState,setSearchState] = useState(false);
@@ -36,7 +36,7 @@ const App =() =>{
     
     setQuery(query); 
     setSearchState(true)     
-    console.log("query returned is:",query)
+    //console.log("query returned is:",query)
     
     if (query === "" ){ setBooksFound([]) }else {searchBook(query)};
   
@@ -46,27 +46,29 @@ const App =() =>{
     //try {
       
       const res = await  BooksAPI.search(query)
-      console.log(query)
+      /*console.log(query)
       console.log("Server response is:",res)
-      console.log("Server response length is:",res.length)
+      console.log("Server response length is:",res.length)*/
       if (res.length > 0){
         
         setBooksFound(res.map((item)=>{
           let bookExist = booksFound.find((book)=> book.id === item.id);
+          console.log(bookExist)
           if (bookExist) {
             item.shelf = bookExist.shelf
+            console.log(bookExist.shelf)
           }
-          console.log(item);
+          //console.log(item);
           return item;
         }
         ))
-        return
+        //return
         //
           //console.log("returned response=",res)
       } else {
-        
-        setSearchState(false);
-        return setBooksFound(`No books found with this name: "${query}"`);
+        console.log("No books Found");
+        //setSearchState(false);
+        return setBooksFound([]);
 
       // console.log("No books Found")}
       // if (searchState=== false) {
