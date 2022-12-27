@@ -12,8 +12,6 @@ const SearchResult = ({ books, shelfType, query, searchState }) => {
     <div className="bookshelf">
       <h2 className="bookshelf-title">Add a book</h2>
       <div className="bookshelf-books">
-        {/*console.log("SearchResults Component is:", books)*/}
-        {/*console.log("Search State is:",searchState)*/}
         <ol className="books-grid">
           {searchState === true && query !== ""
             ? books.map((book) => (

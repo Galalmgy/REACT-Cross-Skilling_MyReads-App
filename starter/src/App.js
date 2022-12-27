@@ -47,18 +47,14 @@ const App = () => {
         res.map((item) => {
           item.shelf = "none";
           let bookExist = books.find((book) => book.id === item.id);
-          console.log(bookExist);
           if (bookExist) {
             item.shelf = bookExist.shelf;
-            console.log(bookExist.shelf);
           }
 
           return item;
         })
       );
     } else {
-      console.log("No books Found");
-      //setSearchState(false);
       return setBooksFound([]);
     }
   };
