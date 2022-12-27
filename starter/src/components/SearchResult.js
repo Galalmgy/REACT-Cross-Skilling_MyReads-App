@@ -1,7 +1,7 @@
 import Books from "./Books";
 const SearchResult =({books ,shelfType,query,searchState})=>{
   //console.log("searchresult ",books,books.length , searchState)
-  console.log("searchresult for shelftype",books.shelf)
+ // console.log("searchresult for shelftype",books.shelf)
   if (!searchState || query==="" ){ return ""} else {
     if (!books.length ) {
       return<span>{`No books found with this name "${query}"`}</span>

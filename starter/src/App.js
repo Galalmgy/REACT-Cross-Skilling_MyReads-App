@@ -52,12 +52,12 @@ const App =() =>{
       if (res.length > 0){
         
         setBooksFound(res.map((item)=>{
-          let bookExist = booksFound.find((book)=> book.id === item.id);
+          let bookExist = books.find((book)=> book.id === item.id);
           console.log(bookExist)
           if (bookExist) {
             item.shelf = bookExist.shelf
-            console.log(bookExist.shelf)
-          }
+             console.log(bookExist.shelf)
+           }
           //console.log(item);
           return item;
         }
