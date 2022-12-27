@@ -52,6 +52,7 @@ const App =() =>{
       if (res.length > 0){
         
         setBooksFound(res.map((item)=>{
+          item.shelf='none'
           let bookExist = books.find((book)=> book.id === item.id);
           console.log(bookExist)
           if (bookExist) {
